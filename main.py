@@ -150,7 +150,7 @@ def run_gui():
     log_textbox = ctk.CTkTextbox(app, width=570, height=500, state="disabled")
     log_textbox.pack(pady=10, expand=True)
 
-    label_footer = ctk.CTkLabel(app, text="Made by CyberByteCraft | github.com/CyberByteCraft | 2025 | Version 0.0.1",
+    label_footer = ctk.CTkLabel(app, text="Made by CyberByteCraft | github.com/CyberByteCraft | 2025 | Version 0.0.2",
                                 font=("Arial", 12, "bold"), cursor="hand2")
     label_footer.pack(side="bottom")
 
