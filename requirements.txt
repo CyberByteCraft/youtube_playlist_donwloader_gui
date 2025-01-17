@@ -1,0 +1,4 @@
+customtkinter~=5.2.2
+future~=1.0.0
+pytube~=15.0.0
+yt-dlp~=2025.1.15
