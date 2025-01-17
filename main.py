@@ -13,10 +13,8 @@ from yt_dlp import YoutubeDL
 class RedirectConsole:
     """Class to redirect console output (stdout and stderr) to a log widget."""
 
-
     def __init__(self, log_widget):
         self.log_widget = log_widget
-
 
     def write(self, message):
         """Redirects messages to the log widget if non-empty."""
@@ -26,14 +24,11 @@ class RedirectConsole:
             self.log_widget.see("end")  # Auto-scroll to the bottom
             self.log_widget.configure(state="disabled")  # Lock the widget again
 
-
     def flush(self):
         pass  # Required for compatibility with sys.stdout
 
 
 def run_gui():
-
-
     def log_message(message):
         """Add a custom message to the log widget."""
         log_textbox.configure(state="normal")
@@ -41,11 +36,9 @@ def run_gui():
         log_textbox.see("end")
         log_textbox.configure(state="disabled")
 
-
     def open_github(event=None):
         """Öffnet die GitHub-URL im Standardbrowser."""
         webbrowser.open("https://github.com/CyberByteCraft")
-
 
     def start_download():
         """Handles the process of downloading a YouTube playlist."""
@@ -96,6 +89,8 @@ def run_gui():
             "outtmpl": f"output/{playlist_name}/%(title)s.%(ext)s",
             "noplaylist": False,
             "progress_hooks": [progress_hook],
+            "download_archive": f"output/{playlist_name}/downloaded.txt",  # Vermeidet erneuten Download
+            "postprocessor_args": ["-i"],  # Überspringt falls Dateien vorhanden
         }
 
         def download():
@@ -117,7 +112,6 @@ def run_gui():
         # Start the download in a new thread to keep the GUI responsive
         threading.Thread(target=download).start()
 
-
     def open_save_dir():
         """Opens the output directory in the file manager."""
         path = os.path.realpath("output")
@@ -134,7 +128,6 @@ def run_gui():
             log_message(f"Error opening output folder: {str(e)}")
             print(f"Error opening output folder: {str(e)}")
 
-
     def window_center():
         """Centers the application window on the screen."""
         w = 600
@@ -144,7 +137,6 @@ def run_gui():
         x = (s_w - w) / 2
         y = (s_h - h) / 2
         return app.geometry(f"{w}x{h}+{int(x)}+{int(y)}")
-
 
     # Set up the custom theme for CustomTkinter
     ctk.set_appearance_mode("Dark")
@@ -177,7 +169,8 @@ def run_gui():
     log_textbox.pack(pady=10, expand=True)
 
     # Footer info
-    label_footer = ctk.CTkLabel(app, text="Made by CyberByteCraft | github.com/CyberByteCraft | 2025 | Version 0.0.1", font=("Arial", 12, "bold"), cursor="hand2")
+    label_footer = ctk.CTkLabel(app, text="Made by CyberByteCraft | github.com/CyberByteCraft | 2025 | Version 0.0.1",
+                                font=("Arial", 12, "bold"), cursor="hand2")
     label_footer.pack(side="bottom")
 
     # Das Klick-Ereignis binden, um den Browser zu öffnen
